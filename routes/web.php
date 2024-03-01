@@ -22,3 +22,14 @@ Route::get('/', function () {
 Route::get('/storage', function () {
     Artisan::call('storage:link');
 });
+
+Route::get('/copy', function () {
+    //copy public_path('uploads') from storage_path('app/uploads'),
+    $source = storage_path('app/uploads');
+    $destination = public_path('uploads');
+    $files = \File::allFiles($source);
+    foreach ($files as $file) {
+        \File::copy($file, $destination . DIRECTORY_SEPARATOR . $file->getFilename());
+    }
+    return 'Copy success';
+});

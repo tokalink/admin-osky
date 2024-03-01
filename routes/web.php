@@ -19,15 +19,18 @@ Route::get('/', function () {
     return redirect('admin');
 });
 
-
-Route::get('/import-sql', function () {
-    $file_dump = '../database/backup.sql';
-    // restore the database from file_dump excecute the command
-    $run = DB::unprepared(file_get_contents($file_dump));
+// group prefix admin
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/import-sql', function () {
+        $file_dump = '../database/backup.sql';
+        // restore the database from file_dump excecute the command
+        $run = DB::unprepared(file_get_contents($file_dump));
+    });
+    
+    // migrate
+    Route::get('/migrate', function () {
+        Artisan::call('migrate');
+        return 'migrate';
+    });    
 });
 
-// migrate
-Route::get('/migrate', function () {
-    Artisan::call('migrate');
-    return 'migrate';
-});

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,17 +20,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/storage', function () {
-    Artisan::call('storage:link');
+Route::get('/import-sql', function () {
+    $file_dump = '../database/backup.sql';
+    // restore the database from file_dump excecute the command
+    $run = DB::unprepared(file_get_contents($file_dump));
 });
 
-Route::get('/copy', function () {
-    //copy public_path('uploads') from storage_path('app/uploads'),
-    $source = storage_path('app/uploads');
-    $destination = public_path('uploads');
-    $files = \File::allFiles($source);
-    foreach ($files as $file) {
-        \File::copy($file, $destination . DIRECTORY_SEPARATOR . $file->getFilename());
-    }
-    return 'Copy success';
+// migrate
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+    return 'migrate';
 });

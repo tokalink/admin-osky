@@ -108,38 +108,38 @@ class CRUDBooster
 
         $file_path_thumbnail = 'uploads_thumbnail/'.date('Y-m');
         Storage::makeDirectory($file_path_thumbnail);
-
+        // dd(public_path($file_path.'/'.$filename));
         if (in_array(strtolower($ext), $images_ext)) {
 
             if ($resize_width && $resize_height) {
-                $img = Image::make(storage_path('app/'.$file_path.'/'.$filename));
+                $img = Image::make(public_path($file_path.'/'.$filename));
                 $img->fit($resize_width, $resize_height);
-                $img->save(storage_path('app/'.$file_path.'/'.$filename), $qty);
+                $img->save(public_path($file_path.'/'.$filename), $qty);
             } elseif ($resize_width && ! $resize_height) {
-                $img = Image::make(storage_path('app/'.$file_path.'/'.$filename));
+                $img = Image::make(public_path($file_path.'/'.$filename));
                 $img->resize($resize_width, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-                $img->save(storage_path('app/'.$file_path.'/'.$filename), $qty);
+                $img->save(public_path($file_path.'/'.$filename), $qty);
             } elseif (! $resize_width && $resize_height) {
-                $img = Image::make(storage_path('app/'.$file_path.'/'.$filename));
+                $img = Image::make(public_path($file_path.'/'.$filename));
                 $img->resize(null, $resize_height, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-                $img->save(storage_path('app/'.$file_path.'/'.$filename), $qty);
+                $img->save(public_path($file_path.'/'.$filename), $qty);
             } else {
-                $img = Image::make(storage_path('app/'.$file_path.'/'.$filename));
+                $img = Image::make(public_path($file_path.'/'.$filename));
                 if ($img->width() > 1300) {
                     $img->resize(1300, null, function ($constraint) {
                         $constraint->aspectRatio();
                     });
                 }
-                $img->save(storage_path('app/'.$file_path.'/'.$filename), $qty);
+                $img->save(public_path($file_path.'/'.$filename), $qty);
             }
 
-            $img = Image::make(storage_path('app/'.$file_path.'/'.$filename));
+            $img = Image::make(public_path($file_path.'/'.$filename));
             $img->fit(350, 350);
-            $img->save(storage_path('app/'.$file_path_thumbnail.'/'.$filename), $thumbQty);
+            $img->save(public_path($file_path_thumbnail.'/'.$filename), $thumbQty);
         }
     }
 

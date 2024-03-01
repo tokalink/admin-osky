@@ -20,10 +20,9 @@ Route::get('/', function () {
 });
 
 // group prefix admin
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'super-admin'], function () {
     Route::get('/import-sql', function () {
         $file_dump = '../database/backup.sql';
-        // restore the database from file_dump excecute the command
         $run = DB::unprepared(file_get_contents($file_dump));
     });
     

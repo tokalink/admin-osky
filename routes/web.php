@@ -20,7 +20,8 @@ Route::get('/', function () {
 });
 
 // group prefix admin
-Route::group(['prefix' => 'super-admin'], function () {
+Route::group(['prefix' => 'admin'], function () {
+
     Route::get('/import-sql', function () {
         $file_dump = '../database/backup.sql';
         $run = DB::unprepared(file_get_contents($file_dump));
@@ -31,5 +32,12 @@ Route::group(['prefix' => 'super-admin'], function () {
         Artisan::call('migrate');
         return 'migrate';
     });    
+
+    
+    // kanban
+    Route::get('/kanban-projects', 'AdminProjectsController@kanban');
+    Route::get('/kanban-leads', 'AdminLeadsController@kanban');
+    // getProposalPdf
+    Route::get('/proposals/{id}', 'AdminProposalsController@getProposalPdf');
 });
 

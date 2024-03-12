@@ -5,7 +5,7 @@
             <div class="panel-heading">
                 [name]
             </div>
-            <div class="panel-body table-responsive no-padding">
+            <div class="panel-body table-responsive">
                 [sql]
             </div>
         </div>

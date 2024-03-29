@@ -59,11 +59,13 @@
 
 <div class="login-box">
     <div class="login-logo">
-        {{-- <a href="{{url('/')}}">
+        @if(CRUDBooster::getSetting("logo"))
+        <a href="{{url('/')}}">
             <img title='{!!(Session::get('appname') == 'CRUDBooster')?"<b>CRUD</b>Booster":CRUDBooster::getSetting('appname')!!}'
                  src='{{ CRUDBooster::getSetting("logo")?asset(CRUDBooster::getSetting('logo')):asset('vendor/crudbooster/assets/logo_crudbooster.png') }}'
                  style='max-width: 100%;max-height:170px'/>
-        </a> --}}
+        </a>
+        @endif
         {{-- <a href="{{ url('/') }}">
             <img src="https://oskystudio.com/wp-content/uploads/2023/03/Blue-Minimalist-Media-Company-Logo-155-%C3%97-60-piksel-4.png" alt="logo" srcset="" style="background-color: black" width="350px">
         </a> --}}

@@ -43,13 +43,13 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Leads','name'=>'leads','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'WEB;OFFLINE'];
 			$this->form[] = ['label'=>'Nama','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:leads','width'=>'col-sm-10','placeholder'=>'Please enter a valid email address'];
+			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'min:1|max:255|email|unique:leads','width'=>'col-sm-10','placeholder'=>'Please enter a valid email address'];
 			$this->form[] = ['label'=>'No HP','name'=>'phone','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-10','placeholder'=>'You can only enter the number only'];
 			$this->form[] = ['label'=>'Lokasi','name'=>'lokasi','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Instansi','name'=>'instansi','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Perorangan;PT'];
-			$this->form[] = ['label'=>'Project','name'=>'project','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Company Profile;TVC;Produk Wedding;Event Profiling;Konten Sosmed;Digital Marketinng;Other'];
+			$this->form[] = ['label'=>'Project','name'=>'project','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Company Profile;TVC;Produk Wedding;Event Profiling;Konten Sosmed;Digital Marketinng;Short Movie;Iklan Produk Detail;Pembuatan Website;Video Clip;Podcast;Other','placeholder'=>'Event'];
 			$this->form[] = ['label'=>'Note','name'=>'note','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'File','name'=>'file','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			// $this->form[] = ['label'=>'File','name'=>'file','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Budget','name'=>'budget','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Status','name'=>'status','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'New;Deal;Cancel;No Response'];
 			# END FORM DO NOT REMOVE THIS LINE
@@ -350,6 +350,7 @@
 			$data['deal'] = DB::table('leads')->where('status', 'Deal')->get();
 			$data['cancel'] = DB::table('leads')->where('status', 'Cancel')->get();
 			$data['norespon'] = DB::table('leads')->where('status', 'No Response')->get();	
+			// dd($data);
 			return view('leads.kanban', $data);
 		}
 		

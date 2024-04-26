@@ -2,26 +2,27 @@
 	<div class="">
 		<div class="box box-default box-solid text-center">
 			<div class="box-header with-border">
-			<h3 class="box-title">{{$le->name}}</h3>
+			<h3 class="box-title">{{\DB::table('leads')->where('id',$le->id)->first()->name ?? ''}}</h3>
 			<div class="pull-right box-tools">               
 				<div class="btn-group">
 				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 					<i class="fa fa-ellipsis-v	"></i></button>
 				<ul class="dropdown-menu pull-right" role="menu">
-					<li><a href="{{url('/admin/kanban-tasks/edit/'.$le->id.'?return_url='.url()->full())}}" class="text-default">Edit</a></li>    
+					<li><a href="{{url('/admin/projects/edit/'.$le->id.'?return_url='.url()->full())}}" class="text-default">Edit</a></li>
                     <li>
-						<form action="/admin/kanban-tasks/edit-save/{{$le->id.'?return_url='.url()->full()}}" method="post" id="frm{{$le->id}}">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">							
-							<input type="hidden" name="done" value="Y">							
+						<form action="/admin/projects/edit-save/{{$le->id.'?return_url='.url()->full()}}" method="post" id="frm{{$le->id}}">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<input type="hidden" name="done" value="Y">
 						</form>
-						<a href="javascript:{}" onclick="document.getElementById('frm{{$le->id}}').submit();">Done</a>                										
+						<a href="javascript:{}" onclick="document.getElementById('frm{{$le->id}}').submit();">Done</a>
 					<li class="divider"></li>
 					<li>
-						<form action="/admin/kanban-tasks/edit-save/{{$le->id.'?return_url='.url()->full()}}" method="post" id="frm{{$le->id}}">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">							
+						<form action="/admin/projects/edit-save/{{$le->id.'?return_url='.url()->full()}}" method="post" id="frm{{$le->id}}">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input type="hidden" name="status" value="Delete">							
 						</form>
 						<a href="javascript:{}" onclick="document.getElementById('frm{{$le->id}}').submit();">Delete</a>
+                    </li>
 				</ul>
 				</div>               
 			</div>              
@@ -30,34 +31,29 @@
 			<div class="box-body" style="white-space: initial">
                 <table class="table text-left">
                     <tr>
-                        <td>Nama PT/Klien</td>
+                        <td>Nama Klien</td>
                         <td class="text-right">:</td>
-                        <td>{{$le->klien}} </td>
+                        <td>{{\DB::table('leads')->where('id',$le->id)->first()->name ?? ''}} </td>
                     </tr>
                     <tr>
-                        <td>Pekerjaan</td>
+                        <td>Project</td>
                         <td class="text-right">:</td>
-                        <td>{{$le->task=='Lainnya' ? $le->task_lainnya : $le->task}}</td>
+                        <td>{{$le->project }}</td>
                     </tr>
                     <tr>
-                        <td>Jatuh Tempo</td>
+                        <td>Date Line</td>
                         <td class="text-right">:</td>
-                        <td>{{$le->jatuh_tempo}}</td>
+                        <td>{{$le->tgl_jatuh_tempo}}</td>
                     </tr>
                     <tr>
-                        <td>Nama Domain</td>
+                        <td>Harga Layanan</td>
                         <td class="text-right">:</td>
-                        <td>{{$le->domain}}</td>
+                        <td>Rp. {{number_format($le->harga_layanan)}}</td>
                     </tr>
                     <tr>
-                        <td>Status</td>
+                        <td>Payment</td>
                         <td class="text-right">:</td>
-                        <td>{{$le->status=='Ya' ? 'Urgent' : 'Tidak Urgent'}}</td>
-                    </tr>
-                    <tr>
-                        <td>Cabang</td>
-                        <td class="text-right">:</td>
-                        <td>{{$le->cabang}}</td>
+                        <td> {{$le->status_payment}} </td>
                     </tr>
 
                     {{-- loop fu1--fu30, jika ada isinya tampilkan --}}

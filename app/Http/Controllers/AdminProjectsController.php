@@ -40,6 +40,8 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Lead Id','name'=>'lead_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'leads,name'];
+			$this->form[] = ['label'=>'Project','name'=>'project','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Harga Layanan','name'=>'harga_layanan','type'=>'number','validation'=>'required','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Date','name'=>'date','type'=>'date','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Tgl Jatuh Tempo','name'=>'tgl_jatuh_tempo','type'=>'date','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Status Payment','name'=>'status_payment','type'=>'select2','width'=>'col-sm-10','dataenum'=>'DP 50%;Lunas;Outstanding'];
@@ -51,6 +53,7 @@
 			$this->form[] = ['label'=>'Follow Up  2','name'=>'progress_fu2','type'=>'textarea','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Follow Up  3','name'=>'progress_fu3','type'=>'textarea','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'textarea','validation'=>'','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Status','name'=>'status','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Deal;Cancel;No Respon'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -344,9 +347,9 @@
 		// kanban
 		public function kanban() {
 			$data['page_title'] = 'Kanban Projects';
-			$data['deal'] = DB::table('leads')->where('status', 'Deal')->get();
-			$data['cancel'] = DB::table('leads')->where('status', 'Cancel')->get();
-			$data['norespon'] = DB::table('leads')->where('status', 'No Response')->get();	
+			$data['deal'] = DB::table('projects')->where('status', 'Deal')->get();
+			$data['cancel'] = DB::table('projects')->where('status', 'Cancel')->get();
+			$data['norespon'] = DB::table('projects')->where('status', 'No Respon')->get();	
 			return view('projects.kanban', $data);
 		}
 

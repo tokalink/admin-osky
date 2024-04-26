@@ -41,3 +41,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/proposals/{id}', 'AdminProposalsController@getProposalPdf');
 });
 
+// Route::any('/mac',function(){
+//     $request = \Request();
+//     dd($request);
+// });

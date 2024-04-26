@@ -60,10 +60,10 @@ class AdminProposalsController extends \crocodicstudio\crudbooster\controllers\C
 		$this->form[] = ['label' => 'Email', 'name' => 'email', 'type' => 'email', 'validation' => '', 'width' => 'col-sm-10', 'placeholder' => 'Please enter a valid email address'];
 		$this->form[] = ['label' => 'Phone', 'name' => 'phone', 'type' => 'text', 'validation' => '', 'width' => 'col-sm-10', 'placeholder' => 'You can only enter the number only'];
 		$this->form[] = ['label' => 'Tanggal', 'name' => 'date', 'type' => 'date', 'validation' => 'required|date', 'width' => 'col-sm-10'];
-		$this->form[] = ['label' => 'No Proposal', 'name' => 'no_proposal', 'type' => 'text', 'validation' => 'required|min:1|max:255', 'width' => 'col-sm-10'];
+		// $this->form[] = ['label' => 'No Proposal', 'name' => 'no_proposal', 'type' => 'text', 'validation' => 'required|min:1|max:255', 'width' => 'col-sm-10'];
 		$this->form[] = ['label' => 'Status', 'name' => 'status', 'type' => 'select', 'validation' => 'required|min:1|max:255', 'width' => 'col-sm-10', 'dataenum' => 'Dalam Proses;Ditolak;Confirmed', 'placeholder' => 'Please select one', 'required' => true];
-		$this->form[] = ['label' => 'Remarks', 'name' => 'remarks', 'type' => 'textarea', 'validation' => '', 'width' => 'col-sm-10'];
-		$this->form[] = ['label' => 'Syarat', 'name' => 'syarat', 'type' => 'textarea', 'validation' => '', 'width' => 'col-sm-10'];
+		$this->form[] = ['label' => 'Remarks (opsional)', 'name' => 'remarks', 'type' => 'textarea', 'validation' => '', 'width' => 'col-sm-10'];
+		$this->form[] = ['label' => 'Syarat (opsional)', 'name' => 'syarat', 'type' => 'textarea', 'validation' => '', 'width' => 'col-sm-10'];
 		// detail
 		$col = [];
 		$col[] = ['label' => 'Nama Pekerjaan', 'name' => 'nama_pekerjaan', 'type' => 'text', 'validation' => 'required|min:1|max:255', 'width' => 'col-sm-10'];
@@ -89,7 +89,6 @@ class AdminProposalsController extends \crocodicstudio\crudbooster\controllers\C
 		//$this->form[] = ["label"=>"Remarks","name"=>"remarks","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 		//$this->form[] = ["label"=>"Syarat","name"=>"syarat","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 		# OLD END FORM
-
 		/* 
 	        | ---------------------------------------------------------------------- 
 	        | Sub Module
@@ -301,8 +300,9 @@ class AdminProposalsController extends \crocodicstudio\crudbooster\controllers\C
 	    */
 	public function hook_before_add(&$postdata)
 	{
-		//Your code here
-
+		$last_id = DB::table('proposals')->orderBy('id','desc')->first()->id ?? 1;
+		$no_proposal = ($last_id+1)."/PRO/".date('d/m/Y');
+		$postdata['no_proposal'] = $no_proposal;
 	}
 
 	/* 

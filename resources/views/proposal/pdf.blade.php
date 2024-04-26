@@ -149,7 +149,6 @@
                     <td colspan="5" style="color:rgb(90, 87, 87)"><hr></td>
                 </tr>
             </tbody>
-
             <tfoot style="padding-top: 10px;">
                 <tr>
                     <td colspan="4" align="right">Total</td>
@@ -157,7 +156,6 @@
                 </tr>
             </tfoot>
         </table>
-
 
         {{-- Remaks --}}
         <br><br>
@@ -172,7 +170,12 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    {!! nl2br($proposal->remarks) !!}
+                    @if($proposal->remarks)
+                        {!! nl2br($proposal->remarks) !!}
+                    @else
+                        Pembayaran hanya dilakukan di<br>
+                        BCA 4958744585 A/n Sky Studio Kreatif PT
+                    @endif
                 </td>
             </tr>
         </table>
@@ -189,7 +192,13 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    {!! nl2br($proposal->syarat) !!}
+                    @if($proposal->syarat)
+                        {!! nl2br($proposal->syarat) !!}
+                    @else
+                        1. Harga belum termasuk PPN 10%<br>
+                        2. Pembayaran 50% di muka, 50% setelah pekerjaan selesai<br>
+                        3. Garansi 1 tahun
+                    @endif
                 </td>
             </tr>
 

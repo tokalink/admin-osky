@@ -2,7 +2,7 @@
 	<div class="">
 		<div class="box box-default box-solid text-center">
 			<div class="box-header with-border">
-			<h3 class="box-title">{{\DB::table('leads')->where('id',$le->id)->first()->name ?? ''}}</h3>
+			<h3 class="box-title">{{\DB::table('leads')->where('id',$le->lead_id)->first()->name ?? ''}}</h3>
 			<div class="pull-right box-tools">               
 				<div class="btn-group">
 				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -33,7 +33,7 @@
                     <tr>
                         <td>Nama Klien</td>
                         <td class="text-right">:</td>
-                        <td>{{\DB::table('leads')->where('id',$le->id)->first()->name ?? ''}} </td>
+                        <td>{{\DB::table('leads')->where('id',$le->lead_id)->first()->name ?? ''}} </td>
                     </tr>
                     <tr>
                         <td>Project</td>
